@@ -27,8 +27,7 @@ Thumbs.db
 *.swo
 *~
 
-# Package managers
-pnpm-lock.yaml
+# Package managers (keep pnpm-lock.yaml for consistent installs)
 yarn.lock
 package-lock.json
 
