@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=ZCOOL+QingKe+HuangYou&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'zpix';
+  src: url('https://cdn.jsdelivr.net/gh/SolidZORO/zpix-pixel-font@v3.1.10/website/zpix.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/SolidZORO/zpix-pixel-font@v3.1.10/website/zpix.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/SolidZORO/zpix-pixel-font@v3.1.10/dist/zpix.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --background: 250 60% 12%;
+    --foreground: 180 50% 90%;
+
+    --card: 250 50% 18%;
+    --card-foreground: 180 50% 92%;
+
+    --popover: 250 50% 16%;
+    --popover-foreground: 180 50% 92%;
+
+    --primary: 160 60% 65%;
+    --primary-foreground: 250 60% 15%;
+
+    --secondary: 35 95% 60%;
+    --secondary-foreground: 250 60% 15%;
+
+    --muted: 250 40% 25%;
+    --muted-foreground: 250 30% 65%;
+
+    --accent: 330 80% 65%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 160 50% 45%;
+    --input: 250 40% 22%;
+    --ring: 160 60% 65%;
+
+    --radius: 0.25rem;
+
+    --sidebar-background: 250 60% 10%;
+    --sidebar-foreground: 180 50% 90%;
+    --sidebar-primary: 160 60% 65%;
+    --sidebar-primary-foreground: 250 60% 15%;
+    --sidebar-accent: 250 40% 25%;
+    --sidebar-accent-foreground: 180 50% 90%;
+    --sidebar-border: 160 50% 45%;
+    --sidebar-ring: 160 60% 65%;
+
+    --font-pixel-en: 'Press Start 2P', cursive;
+    --font-pixel-cn: 'zpix', 'VT323', monospace;
+    --font-pixel-body: 'VT323', 'zpix', monospace;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'zpix', var(--font-pixel-cn);
+    image-rendering: pixelated;
+    background: linear-gradient(135deg,
+      hsl(250 60% 12%) 0%,
+      hsl(260 55% 18%) 50%,
+      hsl(250 60% 12%) 100%
+    );
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'zpix', var(--font-pixel-cn);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+  }
+
+  .font-pixel {
+    font-family: 'Press Start 2P', cursive;
+  }
+
+  .font-pixel-cn {
+    font-family: 'zpix', 'VT323', monospace;
+  }
+
+  .font-pixel-mixed {
+    font-family: 'Press Start 2P', 'zpix', cursive;
+  }
+
+  .font-pixel-body {
+    font-family: 'VT323', 'zpix', monospace;
+  }
+}
+
+@layer components {
+  /* Main pixel button - mint green style */
+  .pixel-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 1rem 2rem;
+    font-family: 'zpix', 'Press Start 2P', cursive;
+    font-size: 1rem;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: 4px solid hsl(160 50% 50%);
+    box-shadow:
+      4px 4px 0 0 hsl(160 50% 35%),
+      inset -2px -2px 0 0 hsl(160 60% 75%),
+      inset 2px 2px 0 0 hsl(160 60% 85%);
+  }
+
+  .pixel-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow:
+      6px 6px 0 0 hsl(160 50% 35%),
+      inset -2px -2px 0 0 hsl(160 60% 75%),
+      inset 2px 2px 0 0 hsl(160 60% 85%);
+  }
+
+  .pixel-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow:
+      2px 2px 0 0 hsl(160 50% 35%),
+      inset -2px -2px 0 0 hsl(160 60% 75%),
+      inset 2px 2px 0 0 hsl(160 60% 85%);
+  }
+
+  /* Decorative dots */
+  .pixel-btn::after {
+    content: '';
+    display: flex;
+    gap: 4px;
+    margin-left: 0.5rem;
+  }
+
+  .pixel-btn-dots {
+    display: inline-flex;
+    gap: 6px;
+    margin-left: 0.75rem;
+  }
+
+  .pixel-btn-dots span {
+    width: 10px;
+    height: 10px;
+  }
+
+  .pixel-btn-dots span:nth-child(1) {
+    background: #fcd34d;
+  }
+
+  .pixel-btn-dots span:nth-child(2) {
+    background: #4ade80;
+  }
+
+  .pixel-btn-dots span:nth-child(3) {
+    background: #f472b6;
+  }
+
+  /* Secondary button style */
+  .pixel-btn-secondary {
+    background: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+    border-color: hsl(35 85% 45%);
+    box-shadow:
+      4px 4px 0 0 hsl(35 85% 35%),
+      inset -2px -2px 0 0 hsl(35 90% 65%),
+      inset 2px 2px 0 0 hsl(35 95% 75%);
+  }
+
+  .pixel-btn-secondary:hover {
+    box-shadow:
+      6px 6px 0 0 hsl(35 85% 35%),
+      inset -2px -2px 0 0 hsl(35 90% 65%),
+      inset 2px 2px 0 0 hsl(35 95% 75%);
+  }
+
+  /* Outline button */
+  .pixel-btn-outline {
+    background: transparent;
+    color: hsl(var(--primary));
+    border: 4px solid hsl(var(--primary));
+    box-shadow:
+      4px 4px 0 0 hsl(160 50% 35%);
+  }
+
+  .pixel-btn-outline:hover {
+    background: hsl(var(--primary) / 0.15);
+    box-shadow:
+      6px 6px 0 0 hsl(160 50% 35%);
+  }
+
+  /* Pixel card - 8-bit 风格 */
+  .pixel-card {
+    background: linear-gradient(
+      135deg,
+      hsl(250 50% 20% / 0.9) 0%,
+      hsl(260 45% 16% / 0.95) 100%
+    );
+    border: 3px solid hsl(var(--border) / 0.6);
+    box-shadow:
+      4px 4px 0 0 hsl(var(--border) / 0.3),
+      inset 1px 1px 0 0 hsl(var(--primary) / 0.15),
+      inset -1px -1px 0 0 hsl(250 50% 10% / 0.5);
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  /* Pixel角装饰 */
+  .pixel-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(135deg, hsl(var(--primary) / 0.3) 4px, transparent 4px),
+      linear-gradient(225deg, hsl(var(--secondary) / 0.3) 4px, transparent 4px),
+      linear-gradient(45deg, hsl(var(--secondary) / 0.3) 4px, transparent 4px),
+      linear-gradient(315deg, hsl(var(--primary) / 0.3) 4px, transparent 4px);
+  }
+
+  /* 扫描线效果 - 增强复古像素感 */
+  .pixel-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 2px,
+      hsl(0 0% 0% / 0.03) 2px,
+      hsl(0 0% 0% / 0.03) 4px
+    );
+  }
+
+  /* Pixel cursor */
+  .pixel-cursor {
+    image-rendering: pixelated;
+  }
+
+  /* 像素风格分隔线 */
+  .pixel-divider {
+    height: 4px;
+    background: repeating-linear-gradient(
+      90deg,
+      hsl(var(--primary)) 0px,
+      hsl(var(--primary)) 8px,
+      transparent 8px,
+      transparent 16px
+    );
+  }
+}
