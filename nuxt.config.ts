@@ -57,6 +57,10 @@ export default defineNuxtConfig({
     navigation: {
       fields: ['title', 'description', 'date'],
     },
+    // 使用 Node 内置 SQLite，避免 native 模块编译问题
+    experimental: {
+      nativeSqlite: true,
+    },
   },
 
   nitro: {
