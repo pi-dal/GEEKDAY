@@ -2,16 +2,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-01-12',
   devtools: { enabled: true },
 
-  css: ['~/assets/css/main.css'],
-
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
-
   app: {
+    baseURL: process.env.NUXT_PUBLIC_BASE_URL || '/',
+    cdnURL: process.env.NUXT_PUBLIC_CDN_URL || process.env.NUXT_PUBLIC_BASE_URL || '/',
     head: {
       title: '23.5°N GEEKDAY | 北回归线极客节',
       meta: [
@@ -27,8 +20,15 @@ export default defineNuxtConfig({
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
       ],
     },
-    baseURL: '/',
-    cdnURL: '/',
+  },
+
+  css: ['~/assets/css/main.css'],
+
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
   },
 
   vite: {
@@ -64,6 +64,6 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'static',
+    preset: 'github-pages',
   },
 })
