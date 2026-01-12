@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
+import { withBase } from 'ufo'
+
 const route = useRoute()
+const baseURL = useRuntimeConfig().app.baseURL || '/'
+const logoSrc = computed(() => withBase('/logo.png', baseURL))
 const isHomePage = computed(() => route.path === '/')
 
 const navItems = [
@@ -78,7 +82,7 @@ onBeforeUnmount(() => {
         to="/"
         class="cursor-pointer hover:opacity-80 transition-opacity"
       >
-        <img src="/logo.png" alt="北回归线极客节" class="h-10" />
+        <img :src="logoSrc" alt="北回归线极客节" class="h-10" />
       </NuxtLink>
 
       <div class="hidden md:flex items-center gap-6">

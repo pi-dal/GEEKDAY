@@ -29,8 +29,8 @@ Use these instructions when assisting in issues/discussions or preparing doc upd
 - Keep tone factual; no speculation.
 - When adding or renaming a page, also update discovery and navigation:
   - `components/Navbar.vue`: add the page to `navItems` or `moreItems` with the correct label/path.
-  - `pages/[...slug].vue`: update `availablePages` and `findPagesOutput` so the in-page terminal shows the new path/description.
-  - `error.vue`: update `findPagesOutput` and the `ls` output list for consistency.
+  - `pages/[...slug].vue`: update `availablePages` and `findPagesOutput` so the in-page terminal shows the new path/description. Keep links base-aware using `withBase/withoutBase` and `app.baseURL`.
+  - `error.vue`: update `availablePages`, `findPagesOutput`, `ls` output, and `find <path>` behavior. Error terminal is base-aware; the logical path strips `app.baseURL`, and `find /path` returns that page's description when available.
 
 ## Response format in issues/discussions
 - Start with a one-line status: `总结：...`
@@ -42,6 +42,7 @@ Use these instructions when assisting in issues/discussions or preparing doc upd
 
 ## Repository specifics to respect
 - Site content lives in `content/` and is built statically via `pnpm generate`; do not suggest runtime storage.
+- Deploys target GitHub Pages with `app.baseURL` set to the repo slug; keep asset paths and navigation base-aware (`withBase/withoutBase`, `NUXT_PUBLIC_BASE_URL`).
 - Keep animation variants inside `composables/usePixelAnimation.ts`; do not add inline motion snippets in docs or components.
 - Use 2-space indent, single quotes in code snippets, and PascalCase for components.
 

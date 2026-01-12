@@ -186,24 +186,29 @@
 </template>
 
 <script setup lang="ts">
+import { withBase, withoutBase } from 'ufo'
+
 const route = useRoute()
 const router = useRouter()
+const baseURL = useRuntimeConfig().app.baseURL || '/'
+const logicalPath = computed(() => withoutBase(route.path, baseURL) || '/')
+const toBase = (path: string) => withBase(path, baseURL)
 
 const { data: page } = await useAsyncData(
-  `content-${route.path}`,
-  () => queryCollection('content').path(route.path).first()
+  () => `content-page:${logicalPath.value}`,
+  () => queryCollection('content').path(logicalPath.value).first(),
+  { watch: [logicalPath] }
 )
 
 if (!page.value) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Page not found',
-    fatal: true
   })
 }
 
 const terminalPath = computed(() => {
-  const path = route.path.replace(/^\//, '').replace(/\//g, '/') || 'home'
+  const path = logicalPath.value.replace(/^\//, '').replace(/\//g, '/') || 'home'
   return `~/geekday/${path}`
 })
 
@@ -308,7 +313,7 @@ function executeCommand() {
       break
       
     case 'pwd':
-      output = `<span class="text-primary">${route.path}</span>`
+      output = `<span class="text-primary">${toBase(logicalPath.value)}</span>`
       break
       
     case 'clear':
@@ -393,12 +398,12 @@ function executeCommand() {
 function handleCd(path: string) {
   if (!path || path === '~') {
     // cd with no args or ~ goes to home
-    navigateTo('/')
+    navigateTo(toBase('/'))
     return
   }
   
   if (path === '/') {
-    navigateTo('/')
+    navigateTo(toBase('/'))
     return
   }
   
@@ -406,10 +411,10 @@ function handleCd(path: string) {
     // Go up one level
     const segments = route.path.split('/').filter(Boolean)
     if (segments.length <= 1) {
-      navigateTo('/')
+      navigateTo(toBase('/'))
     } else {
       segments.pop()
-      navigateTo('/' + segments.join('/'))
+      navigateTo(toBase('/' + segments.join('/')))
     }
     return
   }
@@ -422,12 +427,12 @@ function handleCd(path: string) {
   
   // Handle absolute path
   if (path.startsWith('/')) {
-    navigateTo(path)
+    navigateTo(toBase(path))
     return
   }
   
   // Handle relative path
-  const currentPath = route.path.endsWith('/') ? route.path : route.path + '/'
+  const currentPath = logicalPath.value.endsWith('/') ? logicalPath.value : logicalPath.value + '/'
   let newPath = currentPath + path
   
   // Normalize the path (handle ..)
@@ -441,7 +446,7 @@ function handleCd(path: string) {
     }
   }
   
-  navigateTo('/' + normalized.join('/'))
+  navigateTo(toBase('/' + normalized.join('/')))
 }
 
 function navigateHistory(direction: number) {

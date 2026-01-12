@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { withBase } from 'ufo'
 import { pixelSlideIn, pixelFadeIn, staggerContainer } from '~/composables/usePixelAnimation'
 
 // 赛事指导单位
@@ -23,6 +24,9 @@ const communityPartners = [
   { name: 'OpenBuild', logo: '/sponsors/openbuild.png' },
   { name: '硅星人', logo: '/sponsors/guixingren.png' },
 ]
+
+const baseURL = useRuntimeConfig().app.baseURL || '/'
+const logoSrc = (path: string) => withBase(path, baseURL)
 
 const sponsorCard = {
   initial: { opacity: 0, y: 30, scale: 0.9 },
@@ -90,7 +94,7 @@ const sponsorCard = {
             :transition="{ type: 'spring', stiffness: 400, damping: 25 }"
           >
             <img
-              :src="sponsor.logo"
+              :src="logoSrc(sponsor.logo)"
               :alt="sponsor.name"
               class="max-h-12 max-w-full object-contain filter brightness-100 group-hover:brightness-110 transition-all"
             />
@@ -126,7 +130,7 @@ const sponsorCard = {
             :transition="{ type: 'spring', stiffness: 400, damping: 25 }"
           >
             <img
-              :src="sponsor.logo"
+              :src="logoSrc(sponsor.logo)"
               :alt="sponsor.name"
               class="max-h-10 max-w-full object-contain filter brightness-100 group-hover:brightness-110 transition-all"
             />
@@ -162,7 +166,7 @@ const sponsorCard = {
             :transition="{ type: 'spring', stiffness: 400, damping: 25 }"
           >
             <img
-              :src="sponsor.logo"
+              :src="logoSrc(sponsor.logo)"
               :alt="sponsor.name"
               class="max-h-8 max-w-full object-contain filter brightness-100 group-hover:brightness-110 transition-all"
             />

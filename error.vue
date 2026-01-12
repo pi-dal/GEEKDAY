@@ -115,11 +115,17 @@
 </template>
 
 <script setup lang="ts">
+import { withBase, withoutBase } from 'ufo'
+
 const props = defineProps({
   error: Object
 })
 
+const route = useRoute()
 const router = useRouter()
+const baseURL = useRuntimeConfig().app.baseURL || '/'
+const logicalPath = computed(() => withoutBase(route.path, baseURL) || '/')
+const toBase = (path: string) => withBase(path, baseURL)
 
 const errorTitle = computed(() => {
   switch (props.error?.statusCode) {
@@ -147,7 +153,7 @@ const errorDescription = computed(() => {
   }
 })
 
-const handleError = () => clearError({ redirect: '/' })
+const handleError = () => clearError({ redirect: toBase('/') })
 const goBack = () => router.back()
 
 // Interactive terminal logic
@@ -161,6 +167,20 @@ const terminalInput = ref<HTMLInputElement | null>(null)
 const currentCommand = ref('')
 const commandHistory = ref<CommandEntry[]>([])
 
+const availablePages = [
+  { path: '/', desc: '首页 - 北回归线极客节官网' },
+  { path: '/about', desc: '关于北归节 - 赛事简介与背景' },
+  { path: '/faq', desc: '常见问题 - 报名与参赛须知' },
+  { path: '/prizes', desc: '奖项设置 - 奖金池与评分标准' },
+  { path: '/sponsors', desc: '合作伙伴 - 指导单位与赞助商' },
+  { path: '/schedule/day1', desc: '第一天日程 - 开幕式与开发启动' },
+  { path: '/schedule/day2', desc: '第二天日程 - 路演与颁奖典礼' },
+  { path: '/tracks/ai-agent', desc: 'AI Agent 赛道 - 大模型智能体' },
+  { path: '/tracks/embodied-ai', desc: '具身智能赛道 - 机器人开发' },
+  { path: '/workshops/ai-agent-dev', desc: 'AI Agent 工作坊 - 开发实战' },
+  { path: '/workshops/embodied-ai', desc: '具身智能工作坊 - 入门教程' },
+]
+
 const funnyErrors = [
   "🤖 404 页面也有终端？是的，我们就是这么极客！",
   "🎮 迷路了？输入 find 看看有哪些页面~",
@@ -169,6 +189,27 @@ const funnyErrors = [
 ]
 
 const findPagesOutput = `<span class="text-primary">📂 可用页面列表:</span><br><br><span class="text-yellow-400">/ 首页</span><br>  └─ <span class="text-cyan-400">/about</span>          关于北归节<br>  └─ <span class="text-cyan-400">/faq</span>            常见问题<br>  └─ <span class="text-cyan-400">/prizes</span>         奖项设置<br>  └─ <span class="text-cyan-400">/sponsors</span>       合作伙伴<br><br><span class="text-yellow-400">/schedule/ 活动日程</span><br>  └─ <span class="text-cyan-400">/schedule/day1</span>  第一天 (开幕式/开发启动)<br>  └─ <span class="text-cyan-400">/schedule/day2</span>  第二天 (路演/颁奖典礼)<br><br><span class="text-yellow-400">/tracks/ 赛道介绍</span><br>  └─ <span class="text-cyan-400">/tracks/ai-agent</span>     AI Agent 大模型智能体<br>  └─ <span class="text-cyan-400">/tracks/embodied-ai</span>  具身智能 机器人开发<br><br><span class="text-yellow-400">/workshops/ 技术工作坊</span><br>  └─ <span class="text-cyan-400">/workshops/ai-agent-dev</span>  AI Agent 开发实战<br>  └─ <span class="text-cyan-400">/workshops/embodied-ai</span>   具身智能入门<br><br><span class="text-muted-foreground">使用 cd &lt;路径&gt; 导航，例如: cd /tracks/ai-agent</span>`
+
+function resetTerminal() {
+  commandHistory.value = [
+    {
+      command: 'status',
+      output: `<span class="text-red-400">404</span> <span class="text-muted-foreground">${logicalPath.value}</span>`,
+      isError: true,
+    },
+    {
+      command: 'pwd',
+      output: `<span class="text-primary">${logicalPath.value}</span>`,
+      isError: false,
+    },
+    {
+      command: 'find',
+      output: findPagesOutput,
+      isError: false,
+    },
+  ]
+  currentCommand.value = ''
+}
 
 function executeCommand() {
   const cmd = currentCommand.value.trim()
@@ -187,7 +228,20 @@ function executeCommand() {
       return
       
     case 'find':
-      output = findPagesOutput
+      {
+        const normalized = normalizePath(args)
+        if (!normalized || normalized === '/') {
+          output = findPagesOutput
+          break
+        }
+        const found = availablePages.find(p => p.path === normalized)
+        if (found) {
+          output = `<span class="text-cyan-400">${found.path}</span> <span class="text-muted-foreground">${found.desc}</span>`
+        } else {
+          output = `<span class="text-red-400">未找到 ${normalized}</span><br><span class="text-muted-foreground">输入 find 查看可用路径</span>`
+          isError = true
+        }
+      }
       break
       
     case 'ls':
@@ -214,6 +268,10 @@ function executeCommand() {
   <span class="text-cyan-400">help</span>       - 显示此帮助`
       break
       
+    case 'pwd':
+      output = `<span class="text-primary">${logicalPath.value}</span>`
+      break
+      
     case 'clear':
       commandHistory.value = []
       currentCommand.value = ''
@@ -229,28 +287,25 @@ function executeCommand() {
 }
 
 function handleCd(path: string) {
-  // Get current URL path (error pages might have various paths)
-  const currentPath = window.location.pathname
-  
   if (!path || path === '~') {
     // cd with no args or ~ goes to home
-    clearError({ redirect: '/' })
+    clearError({ redirect: toBase('/') })
     return
   }
   
   if (path === '/') {
-    clearError({ redirect: '/' })
+    clearError({ redirect: toBase('/') })
     return
   }
   
   if (path === '..') {
     // Go up one level
-    const segments = currentPath.split('/').filter(Boolean)
+    const segments = logicalPath.value.split('/').filter(Boolean)
     if (segments.length <= 1) {
-      clearError({ redirect: '/' })
+      clearError({ redirect: toBase('/') })
     } else {
       segments.pop()
-      clearError({ redirect: '/' + segments.join('/') })
+      clearError({ redirect: toBase('/' + segments.join('/')) })
     }
     return
   }
@@ -263,12 +318,12 @@ function handleCd(path: string) {
   
   // Handle absolute path
   if (path.startsWith('/')) {
-    clearError({ redirect: path })
+    clearError({ redirect: toBase(path) })
     return
   }
   
   // Handle relative path - append to current path
-  const basePath = currentPath.endsWith('/') ? currentPath : currentPath + '/'
+  const basePath = logicalPath.value.endsWith('/') ? logicalPath.value : logicalPath.value + '/'
   let newPath = basePath + path
   
   // Normalize the path (handle ..)
@@ -282,16 +337,24 @@ function handleCd(path: string) {
     }
   }
   
-  clearError({ redirect: '/' + normalized.join('/') })
+  clearError({ redirect: toBase('/' + normalized.join('/')) })
 }
 
+function normalizePath(input: string) {
+  if (!input) return '/'
+  const stripped = withoutBase(input.trim(), baseURL)
+  return stripped.startsWith('/') ? stripped : '/' + stripped
+}
+
+watch(
+  logicalPath,
+  () => {
+    resetTerminal()
+  },
+  { immediate: true }
+)
+
 onMounted(() => {
-  commandHistory.value.push({
-    command: 'find',
-    output: `<span class="text-red-400">⚠️ 页面未找到</span><br><br>${findPagesOutput}`,
-    isError: false
-  })
-  
   // Focus input
   nextTick(() => {
     terminalInput.value?.focus()
