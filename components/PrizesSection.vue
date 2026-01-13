@@ -132,7 +132,7 @@ const tagPop = {
         :visible-once="pixelFadeIn.visibleOnce"
       >
         <h3 class="font-pixel-cn text-sm text-muted-foreground mb-4">
-          ◆ 特别奖项
+          ◆ 总奖金池，含实物与现金奖励
         </h3>
         <div
           v-motion
@@ -160,7 +160,7 @@ const tagPop = {
         :visible-once="{ opacity: 1, transition: { duration: 400, delay: 1000 } }"
         class="font-pixel-cn text-sm text-muted-foreground mt-8"
       >
-        总奖金池，含实物与现金奖励
+        ▲ 以上为参与活动附带获得的福利
       </p>
 
       <NuxtLink

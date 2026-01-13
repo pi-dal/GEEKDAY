@@ -197,9 +197,18 @@ const handleCommand = (e: KeyboardEvent) => {
         '<span class="text-primary">可用命令:</span>',
         '  <span class="text-cyan-400">ls [category]</span>  - 列出赞助商',
         '  <span class="text-cyan-400">cat [name]</span>     - 查看赞助商详情',
+        '  <span class="text-cyan-400">more</span>           - 查看完整赞助商页面',
         '  <span class="text-cyan-400">clear</span>          - 清空历史',
         '  <span class="text-cyan-400">become_sponsor</span> - 成为赞助商',
       ]
+    } else if (cmdLower === 'more' || cmdLower === 'open') {
+      output = [`<span class="text-green-400">Navigating to /sponsors...</span>`]
+      commandHistory.value.push({ command: cmd, output, clickableSponsors: undefined })
+      commandInput.value = ''
+      setTimeout(() => {
+        navigateTo('/sponsors')
+      }, 300)
+      return
     } else if (cmdLower === 'clear') {
       commandHistory.value = []
       commandInput.value = ''
