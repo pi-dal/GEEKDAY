@@ -1,0 +1,86 @@
+---
+name: 🐛 Bug 报告
+description: 报告网站存在的问题
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你提交 Bug 报告！请尽量填写以下信息，帮助我们快速定位问题。
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      description: 清晰简洁地描述遇到的问题
+      placeholder: "例如：点击报名按钮后弹窗无法关闭"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 描述如何复现这个问题
+      placeholder: |
+        1. 打开首页
+        2. 点击 '立即报名' 按钮
+        3. 点击弹窗右上角关闭按钮
+        4. 弹窗没有关闭
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望行为
+      description: 描述你期望发生什么
+      placeholder: "弹窗应该正常关闭"
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: 截图
+      description: 如果适用，请添加截图来帮助解释问题
+      placeholder: "拖拽图片到这里或粘贴图片链接"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: 浏览器
+      description: 你使用的是什么浏览器？
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - 其他
+    validations:
+      required: true
+
+  - type: dropdown
+    id: device
+    attributes:
+      label: 设备类型
+      description: 你使用的是什么设备？
+      options:
+        - 桌面端
+        - 移动端（iOS）
+        - 移动端（Android）
+        - 平板
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 附加信息
+      description: 任何其他有助于理解问题的信息
+      placeholder: "例如：只在暗色模式下出现"
+    validations:
+      required: false

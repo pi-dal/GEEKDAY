@@ -1,0 +1,53 @@
+---
+name: 📝 内容更新
+description: 报告内容需要更新或修正
+title: "[Content]: "
+labels: ["content", "documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你帮助我们保持内容准确！
+
+  - type: dropdown
+    id: content-type
+    attributes:
+      label: 内容类型
+      description: 需要更新的内容属于哪个部分？
+      options:
+        - 日程安排
+        - 赞助商信息
+        - 奖项设置
+        - FAQ
+        - 赛道介绍
+        - 场地信息
+        - 其他
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: 当前内容
+      description: 描述当前显示的内容
+      placeholder: "例如：日程显示开幕式时间为 09:00..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: correct
+    attributes:
+      label: 正确内容
+      description: 描述应该显示的正确内容
+      placeholder: "例如：开幕式时间应该是 10:00..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: 信息来源
+      description: 提供信息来源以便验证（可选）
+      placeholder: "例如：主办方邮件确认 / 官方公告链接..."
+    validations:
+      required: false

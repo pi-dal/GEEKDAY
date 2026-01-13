@@ -1,0 +1,58 @@
+---
+name: ✨ 功能建议
+description: 提出新功能或改进建议
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你提出建议！好的想法能让网站变得更好。
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题背景
+      description: 描述你想解决的问题，或者想要改进的地方
+      placeholder: "例如：当前日程表在移动端不太容易浏览..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 建议方案
+      description: 描述你期望的解决方案
+      placeholder: "例如：可以添加日程的日历视图，或者支持左右滑动切换天数..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 备选方案
+      description: 你考虑过的其他替代方案
+      placeholder: "例如：也可以直接提供 ICS 日历文件下载..."
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 优先级
+      description: 你认为这个功能的紧迫程度
+      options:
+        - 低 - 锦上添花
+        - 中 - 有明显提升
+        - 高 - 急需改进
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 附加信息
+      description: 任何其他信息，如截图、设计稿、参考链接等
+      placeholder: "参考网站：..."
+    validations:
+      required: false
