@@ -22,17 +22,17 @@
           <div>
             <h4 class="font-pixel-cn text-sm text-primary mb-4">◆ 联系</h4>
             <div class="space-y-2 font-pixel-cn text-lg">
-              <a href="#" class="block text-muted-foreground hover:text-foreground transition-colors">微信</a>
-              <a href="#" class="block text-muted-foreground hover:text-foreground transition-colors">微博</a>
-              <a href="#" class="block text-muted-foreground hover:text-foreground transition-colors">邮箱</a>
+              <a href="https://www.xiaohongshu.com/user/profile/63cb5ebb000000002702bd16" target="_blank" class="block text-muted-foreground hover:text-foreground transition-colors">小红书</a>
+              <a href="https://mp.weixin.qq.com/s/2yIlxKBQouacdL06iv6jrA" target="_blank" class="block text-muted-foreground hover:text-foreground transition-colors">微信</a>
+              <a href="https://github.com/23-5-N-GeekDay" target="_blank" class="block text-muted-foreground hover:text-foreground transition-colors">GitHub</a>
             </div>
           </div>
         </div>
 
         <div>
           <h4 class="font-pixel-cn text-sm text-primary mb-4">◆ 合作咨询</h4>
-          <a href="mailto:hello@example.com" class="font-pixel-cn text-lg text-muted-foreground hover:text-foreground transition-colors">
-            hello@example.com
+          <a href="mailto:cysybeijing@163.com" class="font-pixel-cn text-lg text-muted-foreground hover:text-foreground transition-colors">
+            cysybeijing@163.com
           </a>
         </div>
       </div>

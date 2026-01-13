@@ -116,6 +116,17 @@ const openIndex = ref<number | null>(null)
           </Transition>
         </div>
       </div>
+
+      <NuxtLink
+        to="/faq"
+        v-motion
+        :initial="{ opacity: 0 }"
+        :visible-once="{ opacity: 1, transition: { duration: 400, delay: 600 } }"
+        class="inline-block mt-8 font-pixel text-xs text-primary hover:text-[#B185DB] transition-colors"
+        :hover="{ x: 5 }"
+      >
+        [ READ MORE... ]
+      </NuxtLink>
     </div>
   </section>
 </template>

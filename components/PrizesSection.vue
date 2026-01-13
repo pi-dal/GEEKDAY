@@ -101,11 +101,11 @@ const tagPop = {
           v-motion
           :initial="prizeCard.initial"
           :visible-once="prizeCard.visibleOnce"
-          :class="`pixel-card p-6 text-center group ${index === 0 ? 'md:-mt-4' : ''}`"
-          :style="index === 0 ? {
-            boxShadow: '4px 4px 0 0 hsl(45 90% 50% / 0.4), inset 0 0 20px hsl(45 90% 60% / 0.1)',
-          } : undefined"
-          :hover="{ y: -8, rotateY: 5, boxShadow: '8px 8px 0 0 hsl(160 60% 45% / 0.4)' }"
+          :class="[
+            'pixel-card p-6 text-center group',
+            index === 0 ? 'md:-mt-4 prize-card-gold' : ''
+          ]"
+          :hover="{ y: -8, rotateY: 5 }"
           :transition="{ type: 'spring', stiffness: 300 }"
         >
           <div
@@ -165,3 +165,17 @@ const tagPop = {
     </div>
   </section>
 </template>
+
+<style scoped>
+.prize-card-gold {
+  box-shadow: 4px 4px 0 0 hsl(45 90% 50% / 0.4), inset 0 0 20px hsl(45 90% 60% / 0.1);
+}
+
+.prize-card-gold:hover {
+  box-shadow: 8px 8px 0 0 hsl(45 90% 55% / 0.5), inset 0 0 30px hsl(45 90% 60% / 0.15);
+}
+
+.pixel-card:hover {
+  box-shadow: 8px 8px 0 0 hsl(160 60% 45% / 0.4);
+}
+</style>

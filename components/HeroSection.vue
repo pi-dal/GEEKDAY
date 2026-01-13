@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import PixelButton from './PixelButton.vue'
+import { useRegisterModal } from '~/composables/useRegisterModal'
+
+const { openModal } = useRegisterModal()
 </script>
 
 <template>
@@ -114,8 +117,8 @@ import PixelButton from './PixelButton.vue'
         <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-2">
           <span class="font-pixel">23.5°N</span>
         </h1>
-        <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-widest text-white/95">
-          <span class="font-pixel">GEEKDAY</span>
+        <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-widest">
+          <span class="font-pixel mario-text">GEEKDAY</span>
         </h2>
       </div>
 
@@ -126,12 +129,14 @@ import PixelButton from './PixelButton.vue'
         :transition="{ duration: 600, delay: 900 }"
         class="flex flex-col sm:flex-row gap-4 justify-center items-center"
       >
-        <PixelButton>
+        <PixelButton @click="openModal">
           立即报名
         </PixelButton>
-        <PixelButton variant="outline" :show-dots="false">
-          了解更多
-        </PixelButton>
+        <a href="https://mp.weixin.qq.com/s/2yIlxKBQouacdL06iv6jrA" target="_blank">
+          <PixelButton variant="outline" :show-dots="false">
+            了解更多
+          </PixelButton>
+        </a>
       </div>
     </div>
 

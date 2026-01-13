@@ -7,8 +7,8 @@
 @font-face {
   font-family: 'zpix';
   src: url('https://cdn.jsdelivr.net/gh/SolidZORO/zpix-pixel-font@v3.1.10/website/zpix.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/SolidZORO/zpix-pixel-font@v3.1.10/website/zpix.woff') format('woff'),
-       url('https://cdn.jsdelivr.net/gh/SolidZORO/zpix-pixel-font@v3.1.10/dist/zpix.ttf') format('truetype');
+    url('https://cdn.jsdelivr.net/gh/SolidZORO/zpix-pixel-font@v3.1.10/website/zpix.woff') format('woff'),
+    url('https://cdn.jsdelivr.net/gh/SolidZORO/zpix-pixel-font@v3.1.10/dist/zpix.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -72,14 +72,18 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeSpeed;
     background: linear-gradient(135deg,
-      hsl(250 60% 12%) 0%,
-      hsl(260 55% 18%) 50%,
-      hsl(250 60% 12%) 100%
-    );
+        hsl(250 60% 12%) 0%,
+        hsl(260 55% 18%) 50%,
+        hsl(250 60% 12%) 100%);
     background-attachment: fixed;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'zpix', var(--font-pixel-cn);
   }
 }
@@ -113,9 +117,37 @@
     -webkit-font-smoothing: none;
     font-smooth: never;
   }
+
+  /* Mario-style 3D pixel text effect - 紫色系 */
+  .mario-text {
+    color: #FFFFFF;
+    text-shadow:
+      /* 像素阶梯阴影 - 紫色系配合背景 */
+      2px 2px 0 #B185DB,
+      3px 3px 0 #9D4EDD,
+      4px 4px 0 #7B2CBF,
+      5px 5px 0 #5A189A,
+      6px 6px 0 #3C096C,
+      /* 光晕效果 */
+      0 0 25px rgba(177, 133, 219, 0.65),
+      0 0 50px rgba(157, 78, 221, 0.4);
+    letter-spacing: 0.1em;
+  }
+
+  /* 响应式调整 - 较小屏幕减少阴影层数 */
+  @media (max-width: 768px) {
+    .mario-text {
+      text-shadow:
+        1px 1px 0 #B185DB,
+        2px 2px 0 #9D4EDD,
+        3px 3px 0 #7B2CBF,
+        0 0 18px rgba(177, 133, 219, 0.55);
+    }
+  }
 }
 
 @layer components {
+
   /* Main pixel button - mint green style */
   .pixel-btn {
     position: relative;
@@ -123,7 +155,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    background: hsl(var(--primary));
+    background: #9FE0CA;
     color: hsl(var(--primary-foreground));
     padding: 1rem 2rem;
     font-family: 'zpix', 'Press Start 2P', cursive;
@@ -220,11 +252,9 @@
 
   /* Pixel card - 8-bit 风格 */
   .pixel-card {
-    background: linear-gradient(
-      135deg,
-      hsl(250 50% 20% / 0.9) 0%,
-      hsl(260 45% 16% / 0.95) 100%
-    );
+    background: linear-gradient(135deg,
+        hsl(250 50% 20% / 0.9) 0%,
+        hsl(260 45% 16% / 0.95) 100%);
     border: 3px solid hsl(var(--border) / 0.6);
     box-shadow:
       4px 4px 0 0 hsl(var(--border) / 0.3),
@@ -233,6 +263,16 @@
     position: relative;
     overflow: hidden;
     z-index: 0;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .pixel-card:hover {
+    box-shadow:
+      4px 4px 0 0 hsl(var(--border) / 0.3),
+      inset 1px 1px 0 0 hsl(var(--primary) / 0.15),
+      inset -1px -1px 0 0 hsl(250 50% 10% / 0.5),
+      0 0 20px rgba(177, 133, 219, 0.5),
+      0 0 40px rgba(157, 78, 221, 0.3);
   }
 
   /* Pixel角装饰 */
@@ -260,13 +300,11 @@
     right: 0;
     bottom: 0;
     pointer-events: none;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent 0px,
-      transparent 2px,
-      hsl(0 0% 0% / 0.03) 2px,
-      hsl(0 0% 0% / 0.03) 4px
-    );
+    background: repeating-linear-gradient(0deg,
+        transparent 0px,
+        transparent 2px,
+        hsl(0 0% 0% / 0.03) 2px,
+        hsl(0 0% 0% / 0.03) 4px);
   }
 
   /* Pixel cursor */
@@ -277,12 +315,10 @@
   /* 像素风格分隔线 */
   .pixel-divider {
     height: 4px;
-    background: repeating-linear-gradient(
-      90deg,
-      hsl(var(--primary)) 0px,
-      hsl(var(--primary)) 8px,
-      transparent 8px,
-      transparent 16px
-    );
+    background: repeating-linear-gradient(90deg,
+        hsl(var(--primary)) 0px,
+        hsl(var(--primary)) 8px,
+        transparent 8px,
+        transparent 16px);
   }
 }

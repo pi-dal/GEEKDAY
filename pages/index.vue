@@ -9,6 +9,10 @@ import SponsorsSection from '~/components/SponsorsSection.vue'
 import FAQSection from '~/components/FAQSection.vue'
 import CTASection from '~/components/CTASection.vue'
 import Footer from '~/components/Footer.vue'
+import RegisterModal from '~/components/RegisterModal.vue'
+import { useRegisterModal } from '~/composables/useRegisterModal'
+
+const { isOpen, closeModal } = useRegisterModal()
 </script>
 
 <template>
@@ -28,5 +32,8 @@ import Footer from '~/components/Footer.vue'
 
     <!-- Footer -->
     <Footer />
+
+    <!-- Register Modal -->
+    <RegisterModal :visible="isOpen" @close="closeModal" />
   </div>
 </template>

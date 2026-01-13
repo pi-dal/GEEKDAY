@@ -2,6 +2,9 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
 import { withBase } from 'ufo'
+import { useRegisterModal } from '~/composables/useRegisterModal'
+
+const { openModal } = useRegisterModal()
 
 const route = useRoute()
 const baseURL = useRuntimeConfig().app.baseURL || '/'
@@ -24,7 +27,7 @@ const moreItems = [
     { label: 'AI Agent 开发', path: '/workshops/ai-agent-dev' },
     { label: '具身智能入门', path: '/workshops/embodied-ai' },
   ]},
-  { label: '合作伙伴', path: '/sponsors' },
+  { label: '合作伙伴', path: '/#sponsors' },
 ]
 
 const isScrolled = ref(false)
@@ -43,6 +46,15 @@ const handleNavClick = (item: { href: string; path: string }) => {
     navigateTo('/' + item.href)
   }
   isMobileMenuOpen.value = false
+}
+
+const handleSponsorsClick = () => {
+  showMoreMenu.value = false
+  if (isHomePage.value) {
+    document.querySelector('#sponsors')?.scrollIntoView({ behavior: 'smooth' })
+  } else {
+    navigateTo('/#sponsors')
+  }
 }
 
 const handleScroll = () => {
@@ -124,6 +136,13 @@ onBeforeUnmount(() => {
                     {{ child.label }}
                   </NuxtLink>
                 </div>
+                <button
+                  v-else-if="item.path === '/#sponsors'"
+                  class="block w-full text-left px-3 py-2 font-pixel-cn text-sm text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-colors"
+                  @click="handleSponsorsClick"
+                >
+                  {{ item.label }}
+                </button>
                 <NuxtLink
                   v-else
                   :to="item.path"
@@ -137,7 +156,7 @@ onBeforeUnmount(() => {
           </Transition>
         </div>
         
-        <PixelButton :show-dots="false" class="py-2 px-4 text-xs font-pixel-cn">
+        <PixelButton :show-dots="false" class="py-2 px-4 text-xs font-pixel-cn" @click="openModal">
           报名
         </PixelButton>
       </div>
@@ -187,7 +206,7 @@ onBeforeUnmount(() => {
         </NuxtLink>
       </template>
       
-      <PixelButton class="mt-4 font-pixel-cn">
+      <PixelButton class="mt-4 font-pixel-cn" @click="() => { openModal(); isMobileMenuOpen = false }">
         立即报名
       </PixelButton>
     </div>

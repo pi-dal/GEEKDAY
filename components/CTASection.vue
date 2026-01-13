@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import PixelButton from './PixelButton.vue'
 import { pixelFadeIn, pixelPopIn } from '~/composables/usePixelAnimation'
+import { useRegisterModal } from '~/composables/useRegisterModal'
+
+const { openModal } = useRegisterModal()
 </script>
 
 <template>
@@ -106,7 +109,7 @@ import { pixelFadeIn, pixelPopIn } from '~/composables/usePixelAnimation'
           :initial="pixelPopIn.initial"
           :visible-once="pixelPopIn.visibleOnce"
         >
-          <PixelButton>
+          <PixelButton @click="openModal">
             立即报名
           </PixelButton>
         </div>
