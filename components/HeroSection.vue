@@ -5,8 +5,8 @@ import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 
 const { openModal } = useRegisterModal()
 
-// Countdown to 2026-02-23 00:00:00 (Beijing Time)
-const targetDate = new Date('2026-02-23T00:00:00+08:00').getTime()
+// Countdown to 2026-01-31 23:59:00 (Beijing Time) - Registration Deadline
+const targetDate = new Date('2026-01-31T23:59:00+08:00').getTime()
 const now = ref(Date.now())
 let timer: ReturnType<typeof setInterval> | null = null
 
@@ -184,6 +184,7 @@ onUnmounted(() => {
         :transition="{ duration: 600, delay: 850 }"
         class="mb-6"
       >
+        <p class="font-pixel-cn text-lg text-white/90 mb-4" style="text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.4), 0 0 30px rgba(255,255,255,0.2);">截止报名</p>
         <div class="flip-countdown">
           <div class="flip-item">
             <div class="flip-card">
