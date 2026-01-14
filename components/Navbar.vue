@@ -103,7 +103,7 @@ onBeforeUnmount(() => {
         class="cursor-pointer"
         @click.prevent="handleLogoClick"
       >
-        <img :src="logoSrc" alt="北回归线极客节" class="h-10" width="160" height="40" loading="eager" />
+        <img :src="logoSrc" alt="北回归线极客节" class="h-11" width="176" height="44" loading="eager" />
       </a>
 
       <div class="hidden md:flex items-center gap-6">
