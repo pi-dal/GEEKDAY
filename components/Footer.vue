@@ -113,6 +113,9 @@ const qrCodeSrc = computed(() => withBase('/WeChatBot.png', baseURL))
                     :src="qrCodeSrc"
                     alt="企业微信二维码"
                     class="w-44 h-44 object-contain"
+                    width="176"
+                    height="176"
+                    loading="lazy"
                   />
                 </div>
               </div>

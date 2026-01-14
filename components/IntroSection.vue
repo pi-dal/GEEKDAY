@@ -22,6 +22,9 @@ const towerSrc = computed(() => withBase('/images/tower.jpg', baseURL))
           :src="towerSrc" 
           alt="北回归线标志塔" 
           class="tower-image w-4/5 mx-auto rounded-lg border-2 border-primary/20"
+          width="800"
+          height="533"
+          loading="lazy"
         />
       </div>
 

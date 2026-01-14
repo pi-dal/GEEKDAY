@@ -87,6 +87,9 @@ onMounted(() => {
                     :src="logoSrc"
                     :alt="sponsor.name"
                     class="h-16 max-w-full object-contain"
+                    width="200"
+                    height="64"
+                    loading="lazy"
                   />
                 </div>
               </div>

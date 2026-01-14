@@ -1,17 +1,20 @@
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
 import HeroSection from '~/components/HeroSection.vue'
 import IntroSection from '~/components/IntroSection.vue'
-import StatsSection from '~/components/StatsSection.vue'
-import AboutSection from '~/components/AboutSection.vue'
-import VenueSection from '~/components/VenueSection.vue'
-import ScheduleSection from '~/components/ScheduleSection.vue'
-import PrizesSection from '~/components/PrizesSection.vue'
-import SponsorsSection from '~/components/SponsorsSection.vue'
-import FAQSection from '~/components/FAQSection.vue'
-import CTASection from '~/components/CTASection.vue'
-import Footer from '~/components/Footer.vue'
-import RegisterModal from '~/components/RegisterModal.vue'
 import { useRegisterModal } from '~/composables/useRegisterModal'
+
+// Lazy load below-the-fold components for better initial load performance
+const StatsSection = defineAsyncComponent(() => import('~/components/StatsSection.vue'))
+const AboutSection = defineAsyncComponent(() => import('~/components/AboutSection.vue'))
+const VenueSection = defineAsyncComponent(() => import('~/components/VenueSection.vue'))
+const ScheduleSection = defineAsyncComponent(() => import('~/components/ScheduleSection.vue'))
+const PrizesSection = defineAsyncComponent(() => import('~/components/PrizesSection.vue'))
+const SponsorsSection = defineAsyncComponent(() => import('~/components/SponsorsSection.vue'))
+const FAQSection = defineAsyncComponent(() => import('~/components/FAQSection.vue'))
+const CTASection = defineAsyncComponent(() => import('~/components/CTASection.vue'))
+const Footer = defineAsyncComponent(() => import('~/components/Footer.vue'))
+const RegisterModal = defineAsyncComponent(() => import('~/components/RegisterModal.vue'))
 
 const { isOpen, closeModal } = useRegisterModal()
 </script>

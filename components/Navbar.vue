@@ -61,8 +61,12 @@ const handleScroll = () => {
   isScrolled.value = window.scrollY > 100
 }
 
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+const handleLogoClick = () => {
+  if (isHomePage.value) {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  } else {
+    navigateTo('/')
+  }
 }
 
 const navMotionClass = computed(() => {
@@ -95,11 +99,11 @@ onBeforeUnmount(() => {
   >
     <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
       <a
-        href="#"
+        href="/"
         class="cursor-pointer"
-        @click.prevent="scrollToTop"
+        @click.prevent="handleLogoClick"
       >
-        <img :src="logoSrc" alt="北回归线极客节" class="h-10" />
+        <img :src="logoSrc" alt="北回归线极客节" class="h-10" width="160" height="40" loading="eager" />
       </a>
 
       <div class="hidden md:flex items-center gap-6">
