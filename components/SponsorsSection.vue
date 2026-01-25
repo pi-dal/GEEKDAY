@@ -29,6 +29,7 @@ const sponsorDescriptions: Record<string, string> = {
   '普宁市潮实高级中学': '作为指导单位，提供场地与教育资源支持。',
   '汕头华侨经济文化合作试验区管委会': '作为指导单位，提供政策指导与资源对接支持。',
   '潮阳实验学校北京校友会': '作为主办单位，统筹赛事策划与组织工作。',
+  '去探索': '社区伙伴，为极客节提供社区支持。',
 }
 
 const sponsorUrls: Record<string, string> = {
@@ -54,6 +55,7 @@ const sponsorUrls: Record<string, string> = {
   '汕头市潮阳实验学校': 'https://www.cysy.com.cn',
   '普宁市潮实高级中学': 'https://www.cysy.com.cn',
   '汕头市潮阳实验学校教育慈善基金会': 'https://www.cysy.com.cn',
+  '去探索': 'https://qutansuo.cn',
 }
 
 const sponsorLogos: Record<string, string> = {
@@ -81,6 +83,7 @@ const sponsorLogos: Record<string, string> = {
   '深圳科创学院': '/sponsors/x-institute.png',
   'AIAgent2025': '/sponsors/aiagent2025.png',
   '汕头华侨经济文化合作试验区管委会': '/sponsors/sthq.png',
+  '去探索': '/sponsors/qutansuo.png',
 }
 
 // 终端显示的赞助商行数据
@@ -120,6 +123,7 @@ const sponsorLines: SponsorLine[] = [
   { category: 'community', name: '硅星人', color: 'text-purple-400' },
   { category: 'community', name: '深圳科创学院', color: 'text-purple-400' },
   { category: 'community', name: 'AIAgent2025', color: 'text-purple-400' },
+  { category: 'community', name: '去探索', color: 'text-purple-400' },
 ]
 
 const baseURL = useRuntimeConfig().app.baseURL || '/'
