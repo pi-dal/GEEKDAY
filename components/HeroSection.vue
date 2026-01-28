@@ -295,7 +295,7 @@ onUnmounted(() => {
       :initial="{ opacity: 0, x: -20 }"
       :visible="{ opacity: 1, x: 0 }"
       :transition="{ delay: 1500, duration: 800 }"
-      class="absolute bottom-4 left-4 z-20 flex origin-bottom-left gap-3 scale-75 md:gap-4 md:scale-100"
+      class="absolute bottom-4 left-4 z-20 hidden origin-bottom-left gap-3 md:flex md:gap-4"
     >
       <div class="group flex flex-col items-center gap-1 md:gap-2">
         <div class="overflow-hidden rounded-lg bg-white p-1 shadow-[2px_2px_0_0_rgba(0,0,0,0.5)] transition-transform group-hover:-translate-y-1 md:shadow-[4px_4px_0_0_rgba(0,0,0,0.5)]">
