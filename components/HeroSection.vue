@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import { withBase } from 'ufo'
 import PixelButton from './PixelButton.vue'
 import { useRegisterModal } from '~/composables/useRegisterModal'
 import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 
 const { openModal } = useRegisterModal()
+
+const baseURL = useRuntimeConfig().app.baseURL || '/'
+const toBase = (path: string) => withBase(path, baseURL)
 
 const registrationDeadline = new Date('2026-01-31T23:59:00+08:00').getTime()
 const kickoffTime = new Date('2026-02-23T10:00:00+08:00').getTime()
@@ -283,6 +287,39 @@ onUnmounted(() => {
         :transition="{ duration: 1000, repeat: Infinity }"
         class="w-3 h-8 bg-green-400"
       />
+    </div>
+
+    <!-- QR Codes -->
+    <div
+      v-motion
+      :initial="{ opacity: 0, x: -20 }"
+      :visible="{ opacity: 1, x: 0 }"
+      :transition="{ delay: 1500, duration: 800 }"
+      class="absolute bottom-4 left-4 z-20 flex origin-bottom-left gap-3 scale-75 md:gap-4 md:scale-100"
+    >
+      <div class="group flex flex-col items-center gap-1 md:gap-2">
+        <div class="overflow-hidden rounded-lg bg-white p-1 shadow-[2px_2px_0_0_rgba(0,0,0,0.5)] transition-transform group-hover:-translate-y-1 md:shadow-[4px_4px_0_0_rgba(0,0,0,0.5)]">
+          <img
+            :src="toBase('/images/RedNote.png')"
+            alt="小红书 RedNote 二维码"
+            loading="lazy"
+            class="h-16 w-16 [image-rendering:pixelated] md:h-20 md:w-20"
+          />
+        </div>
+        <span class="rounded bg-black/40 px-1.5 py-0.5 font-pixel text-[8px] text-white/80 backdrop-blur-sm md:text-[10px]">RedNote</span>
+      </div>
+
+      <div class="group flex flex-col items-center gap-1 md:gap-2">
+        <div class="overflow-hidden rounded-lg bg-white p-1 shadow-[2px_2px_0_0_rgba(0,0,0,0.5)] transition-transform group-hover:-translate-y-1 md:shadow-[4px_4px_0_0_rgba(0,0,0,0.5)]">
+          <img
+            :src="toBase('/images/WeChat.png')"
+            alt="微信公众号 二维码"
+            loading="lazy"
+            class="h-16 w-16 [image-rendering:pixelated] md:h-20 md:w-20"
+          />
+        </div>
+        <span class="rounded bg-black/40 px-1.5 py-0.5 font-pixel text-[8px] text-white/80 backdrop-blur-sm md:text-[10px]">WeChat</span>
+      </div>
     </div>
 
     <div
