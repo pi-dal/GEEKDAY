@@ -34,6 +34,9 @@ package-lock.json
 # Build outputs
 *.local
 
+# Documentation
+docs
+
 # OS generated files
 .AppleDouble
 .LSOverride

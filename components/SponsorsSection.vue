@@ -90,10 +90,20 @@ const sponsorLogos: Record<string, string> = {
 }
 
 // 终端显示的赞助商行数据
+type SponsorCategory = 'supervisor' | 'organizer' | 'guidance' | 'track' | 'community'
+
 interface SponsorLine {
-  category: string
+  category: SponsorCategory
   name: string
   color: string
+}
+
+const categoryMeta: Record<SponsorCategory, { label: string; headingClass: string }> = {
+  supervisor: { label: '指导单位', headingClass: 'text-yellow-600' },
+  organizer: { label: '主办单位', headingClass: 'text-orange-600' },
+  guidance: { label: '赛事指导单位', headingClass: 'text-cyan-600' },
+  track: { label: '赛道支持单位', headingClass: 'text-green-600' },
+  community: { label: '社区伙伴', headingClass: 'text-purple-600' },
 }
 
 const sponsorLines: SponsorLine[] = [
@@ -140,6 +150,7 @@ const commandInput = ref('')
 const showCursor = ref(true)
 const isTerminalVisible = ref(false)
 const terminalInput = ref<HTMLInputElement | null>(null)
+const terminalBodyRef = ref<HTMLElement | null>(null)
 
 // 命令历史记录
 interface CommandEntry {
@@ -176,6 +187,10 @@ const startTypewriter = () => {
   const typeNextLine = () => {
     if (visibleLines.value < sponsorLines.length) {
       visibleLines.value++
+      nextTick(() => {
+        if (!terminalBodyRef.value) return
+        terminalBodyRef.value.scrollTop = terminalBodyRef.value.scrollHeight
+      })
       setTimeout(typeNextLine, 80)
     } else {
       isTypingComplete.value = true
@@ -372,7 +387,10 @@ onMounted(() => {
         </div>
 
         <!-- Terminal Content -->
-        <div class="p-6 bg-[#0a0f0a]/80 backdrop-blur-sm font-mono min-h-[400px] max-h-[500px] overflow-y-auto">
+        <div
+          ref="terminalBodyRef"
+          class="p-6 bg-[#0a0f0a]/80 backdrop-blur-sm font-mono min-h-[400px] max-h-[500px] overflow-y-auto"
+        >
           <!-- 欢迎信息 -->
           <div class="flex items-start gap-2 mb-4">
             <span class="text-primary font-pixel text-xs whitespace-nowrap">geek@23.5N:~$</span>
@@ -382,37 +400,16 @@ onMounted(() => {
           <!-- Separator -->
           <div class="border-t border-dashed border-primary/30 mb-4"></div>
 
-          <!-- 分类标题 - 指导单位 -->
-          <div v-if="visibleLines >= 1" class="mb-2">
-            <span class="text-yellow-600 font-pixel text-xs"># 指导单位</span>
-          </div>
-
           <!-- 赞助商列表 - 打字机效果 -->
           <template v-for="(sponsor, index) in sponsorLines" :key="sponsor.name">
             <!-- 分类标题 -->
-            <div 
-              v-if="visibleLines > index && sponsor.category === 'organizer' && index === 4" 
+            <div
+              v-if="visibleLines > index && (index === 0 || sponsor.category !== sponsorLines[index - 1].category)"
               class="mt-4 mb-2"
             >
-              <span class="text-orange-600 font-pixel text-xs"># 主办单位</span>
-            </div>
-            <div 
-              v-if="visibleLines > index && sponsor.category === 'guidance' && index === 5" 
-              class="mt-4 mb-2"
-            >
-              <span class="text-cyan-600 font-pixel text-xs"># 赛事指导单位</span>
-            </div>
-            <div 
-              v-if="visibleLines > index && sponsor.category === 'track' && index === 12" 
-              class="mt-4 mb-2"
-            >
-              <span class="text-green-600 font-pixel text-xs"># 赛道支持单位</span>
-            </div>
-            <div 
-              v-if="visibleLines > index && sponsor.category === 'community' && index === 19" 
-              class="mt-4 mb-2"
-            >
-              <span class="text-purple-600 font-pixel text-xs"># 社区伙伴</span>
+              <span :class="[categoryMeta[sponsor.category].headingClass, 'font-pixel text-xs']">
+                # {{ categoryMeta[sponsor.category].label }}
+              </span>
             </div>
 
             <!-- 赞助商行 -->
