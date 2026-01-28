@@ -5,8 +5,9 @@ import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 
 const { openModal } = useRegisterModal()
 
-// Countdown to 2026-01-31 23:59:00 (Beijing Time) - Registration Deadline
-const targetDate = new Date('2026-01-31T23:59:00+08:00').getTime()
+const registrationDeadline = new Date('2026-01-31T23:59:00+08:00').getTime()
+const kickoffTime = new Date('2026-02-23T10:00:00+08:00').getTime()
+
 const now = ref(Date.now())
 let timer: ReturnType<typeof setInterval> | null = null
 
@@ -14,19 +15,32 @@ let timer: ReturnType<typeof setInterval> | null = null
 const prevSeconds = ref(-1)
 const isFlipping = ref(false)
 
+const countdownTarget = computed(() =>
+  now.value <= registrationDeadline ? registrationDeadline : kickoffTime,
+)
+
+const countdownLabel = computed(() =>
+  now.value <= registrationDeadline ? '截止报名' : '距离开幕Kick Off',
+)
+
 const countdown = computed(() => {
-  const diff = targetDate - now.value
-  
+  const diff = countdownTarget.value - now.value
+
   if (diff <= 0) {
     return { days: 0, hours: 0, minutes: 0, seconds: 0, isOver: true }
   }
-  
+
   const days = Math.floor(diff / (1000 * 60 * 60 * 24))
   const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
   const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
   const seconds = Math.floor((diff % (1000 * 60)) / 1000)
-  
+
   return { days, hours, minutes, seconds, isOver: false }
+})
+
+watch(countdownTarget, () => {
+  prevSeconds.value = -1
+  isFlipping.value = false
 })
 
 // Watch for second changes to trigger flip animation
@@ -184,7 +198,9 @@ onUnmounted(() => {
         :transition="{ duration: 600, delay: 850 }"
         class="mb-6"
       >
-        <p class="font-pixel-cn text-lg text-white/90 mb-4" style="text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.4), 0 0 30px rgba(255,255,255,0.2);">截止报名</p>
+        <p class="font-pixel-cn text-lg text-white/90 mb-4" style="text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.4), 0 0 30px rgba(255,255,255,0.2);">
+          {{ countdownLabel }}
+        </p>
         <div class="flip-countdown">
           <div class="flip-item">
             <div class="flip-card">
