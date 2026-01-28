@@ -2,14 +2,13 @@
 import { pixelSlideIn, pixelFadeIn, pixelScanIn } from '~/composables/usePixelAnimation'
 
 const scheduleDay0 = [
-  { time: '18:00', event: 'Kick Off Party Night 开始', icon: '🎉' },
+  { time: '18:00', event: 'Warm-up Party 派对之夜', icon: '🎉' },
   { time: '18:00-22:00', event: '破冰交流 & 组队', icon: '🤝' },
   { time: '全程', event: '轻食饮品供应', icon: '🍕' },
 ]
 
 const scheduleDay1 = [
-  { time: '10:00', event: 'Kick Off Ceremony 开幕', icon: '🎤' },
-  { time: '10:00-11:00', event: '赛道介绍 & 嘉宾分享', icon: '💡' },
+  { time: '10:00-11:00', event: 'Kick Off 开幕', icon: '🎤' },
   { time: '11:00', event: 'Hackathon 正式开始', icon: '⚡' },
   { time: '11:00-24:00', event: '全天开发 + 技术支持', icon: '💻' },
 ]
@@ -18,15 +17,15 @@ const scheduleDay2 = [
   { time: '00:00-24:00', event: 'Hackathon 持续开发', icon: '🚀' },
   { time: '全天', event: '技术导师答疑', icon: '👨‍🏫' },
   { time: '全天', event: '硬件资源支持', icon: '🛠️' },
-  { time: '待定', event: 'Workshop & Tech Talk', icon: '📚' },
+  { time: '20:00-20:30', event: 'MakerShow 材料收集', icon: '📚' },
 ]
 
 const scheduleDay3 = [
   { time: '00:00-11:00', event: 'Final Sprint 最后冲刺', icon: '⏰' },
   { time: '11:00', event: '作品提交截止', icon: '📦' },
-  { time: '12:30-14:30', event: 'Nerd Bar + Maker Show', icon: '🍻' },
+  { time: '12:30-14:30', event: 'Nerd Bar 圆桌酒会 + MakerShow 科技庙会', icon: '🍻' },
   { time: '14:30-15:30', event: 'Closing Forum 闭幕论坛', icon: '🏆' },
-  { time: '18:00-22:00', event: 'After Party 庆功派对', icon: '🎊' },
+  { time: '18:00-22:00', event: 'After Party 派对之夜', icon: '🎊' },
 ]
 
 const scheduleItemVariants = {
