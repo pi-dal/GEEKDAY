@@ -45,7 +45,7 @@ Use these instructions when assisting in issues/discussions or preparing doc upd
 - Deploys target GitHub Pages with `app.baseURL` set to the repo slug; keep asset paths and navigation base-aware (`withBase/withoutBase`, `NUXT_PUBLIC_BASE_URL`).
 - Keep animation variants inside `composables/usePixelAnimation.ts`; do not add inline motion snippets in docs or components.
 - Use 2-space indent, single quotes in code snippets, and PascalCase for components.
-- 活动日程有三天：`/schedule/day1`、`/schedule/day2`、`/schedule/day3`。当前为“待定”占位，更新日程时同步 `ScheduleSection.vue` 及导航（`pages/[...slug].vue`、`error.vue`、Navbar）。
+- 活动日程有四天：`/schedule/day0`、`/schedule/day1`、`/schedule/day2`、`/schedule/day3`。已更新完整日程安排，更新日程时同步 `ScheduleSection.vue` 及导航（`pages/[...slug].vue`、`error.vue`、Navbar）。
 - 奖项设置目前仅公开总奖金池 ¥60,000，其他奖项与福利文案为待公布；更新奖项时同步 `content/prizes.md` 与 `PrizesSection.vue`。
 
 ## Safety/limits

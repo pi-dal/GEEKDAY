@@ -5,7 +5,7 @@
 23.5°N GEEKDAY 是一个 48 小时黑客马拉松活动的官方网站，采用像素风格设计。技术栈为 **Nuxt 4 + Tailwind CSS + @nuxt/content + @vueuse/motion**。
 
 当前状态：
-- 活动日程：三天（DAY1/2/3）均为“待定”占位，详情待官方公布。
+- 活动日程：四天（DAY 0-3），已更新完整日程安排。
 - 奖项设置：仅公开总奖金池 ¥60,000，具体奖项与福利待公布。
 
 ---
@@ -49,6 +49,7 @@ design-leap-nuxt/
 │   ├── prizes.md
 │   ├── sponsors.md
 │   ├── schedule/
+│   │   ├── day0.md
 │   │   ├── day1.md
 │   │   ├── day2.md
 │   │   └── day3.md
@@ -205,15 +206,15 @@ pnpm preview          # 预览构建结果
 
 ```markdown
 ---
-title: 第一天活动安排（待定）
+title: DAY 1 - Kick Off 开幕 + Hackathon 启动
 date: 2026-02-15
 ---
 
-详细日程待确认，稍后公布。
+详细日程已更新。
 ```
 
-- 日程共三天：`day1.md`、`day2.md`、`day3.md`，主页 `ScheduleSection.vue` 使用占位数据，更新时需同步。
-- `pages/[...slug].vue` 与 `error.vue` 的终端导航已包含 DAY1/2/3，新增路径时一并维护。
+- 日程共四天：`day0.md`、`day1.md`、`day2.md`、`day3.md`，主页 `ScheduleSection.vue` 已更新完整日程数据，更新时需同步。
+- `pages/[...slug].vue` 与 `error.vue` 的终端导航已包含 DAY0/1/2/3，新增路径时一并维护。
 
 ### 赞助商 (`content/sponsors.md`)
 

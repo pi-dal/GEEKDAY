@@ -1,19 +1,32 @@
 <script setup lang="ts">
 import { pixelSlideIn, pixelFadeIn, pixelScanIn } from '~/composables/usePixelAnimation'
 
+const scheduleDay0 = [
+  { time: '18:00', event: 'Kick Off Party Night 开始', icon: '🎉' },
+  { time: '18:00-22:00', event: '破冰交流 & 组队', icon: '🤝' },
+  { time: '全程', event: '轻食饮品供应', icon: '🍕' },
+]
+
 const scheduleDay1 = [
-  { time: '待定', event: '日程更新中', icon: '⌛' },
-  { time: '待定', event: '敬请期待', icon: '🛠️' },
+  { time: '10:00', event: 'Kick Off Ceremony 开幕', icon: '🎤' },
+  { time: '10:00-11:00', event: '赛道介绍 & 嘉宾分享', icon: '💡' },
+  { time: '11:00', event: 'Hackathon 正式开始', icon: '⚡' },
+  { time: '11:00-24:00', event: '全天开发 + 技术支持', icon: '💻' },
 ]
 
 const scheduleDay2 = [
-  { time: '待定', event: '日程更新中', icon: '⌛' },
-  { time: '待定', event: '敬请期待', icon: '🛠️' },
+  { time: '00:00-24:00', event: 'Hackathon 持续开发', icon: '🚀' },
+  { time: '全天', event: '技术导师答疑', icon: '👨‍🏫' },
+  { time: '全天', event: '硬件资源支持', icon: '🛠️' },
+  { time: '待定', event: 'Workshop & Tech Talk', icon: '📚' },
 ]
 
 const scheduleDay3 = [
-  { time: '待定', event: '日程更新中', icon: '⌛' },
-  { time: '待定', event: '敬请期待', icon: '🛠️' },
+  { time: '00:00-11:00', event: 'Final Sprint 最后冲刺', icon: '⏰' },
+  { time: '11:00', event: '作品提交截止', icon: '📦' },
+  { time: '12:30-14:30', event: 'Nerd Bar + Maker Show', icon: '🍻' },
+  { time: '14:30-15:30', event: 'Closing Forum 闭幕论坛', icon: '🏆' },
+  { time: '18:00-22:00', event: 'After Party 庆功派对', icon: '🎊' },
 ]
 
 const scheduleItemVariants = {
@@ -30,8 +43,9 @@ const scheduleItemVariants = {
   },
 }
 
-const activeDay = ref(1)
+const activeDay = ref(0)
 const currentSchedule = computed(() => {
+  if (activeDay.value === 0) return scheduleDay0
   if (activeDay.value === 1) return scheduleDay1
   if (activeDay.value === 2) return scheduleDay2
   return scheduleDay3
@@ -69,7 +83,7 @@ const activeDayPath = computed(() => `/schedule/day${activeDay.value}`)
         class="flex gap-3 mb-8"
       >
         <button
-          v-for="day in [1, 2, 3]"
+          v-for="day in [0, 1, 2, 3]"
           :key="day"
           @click="activeDay = day"
           class="font-pixel text-xs px-6 py-3 transition-all"
