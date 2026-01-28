@@ -30,6 +30,7 @@ const sponsorDescriptions: Record<string, string> = {
   '汕头华侨经济文化合作试验区管委会': '作为指导单位，提供政策指导与资源对接支持。',
   '潮阳实验学校北京校友会': '作为主办单位，统筹赛事策划与组织工作。',
   '去探索': '社区伙伴，为极客节提供社区支持。',
+  'Tosea.ai': '提供AI Slides智能幻灯片生成工具的使用权限，助力参赛选手高效制作演示文稿。',
 }
 
 const sponsorUrls: Record<string, string> = {
@@ -56,6 +57,7 @@ const sponsorUrls: Record<string, string> = {
   '普宁市潮实高级中学': 'https://www.cysy.com.cn',
   '汕头市潮阳实验学校教育慈善基金会': 'https://www.cysy.com.cn',
   '去探索': 'https://qutansuo.cn',
+  'Tosea.ai': 'https://tosea.ai',
 }
 
 const sponsorLogos: Record<string, string> = {
@@ -84,6 +86,7 @@ const sponsorLogos: Record<string, string> = {
   'AIAgent2025': '/sponsors/aiagent2025.png',
   '汕头华侨经济文化合作试验区管委会': '/sponsors/sthq.png',
   '去探索': '/sponsors/qutansuo.png',
+  'Tosea.ai': '/sponsors/tosea.png',
 }
 
 // 终端显示的赞助商行数据
@@ -117,6 +120,7 @@ const sponsorLines: SponsorLine[] = [
   { category: 'track', name: 'SeeedStudio', color: 'text-green-400' },
   { category: 'track', name: '拓竹Cyberbrick', color: 'text-green-400' },
   { category: 'track', name: '云鲸智能', color: 'text-green-400' },
+  { category: 'track', name: 'Tosea.ai', color: 'text-green-400' },  
   // 社区伙伴
   { category: 'community', name: '观潮KwanTeo', color: 'text-purple-400' },
   { category: 'community', name: 'OpenBuild', color: 'text-purple-400' },
